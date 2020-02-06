@@ -1,0 +1,15 @@
+{
+  "name": "customer-ids-node",
+  "version": "1.0.0",
+  "description": "expressjs backend for customer ids API",
+  "main": "app.js",
+  "scripts": {
+    "test": "test.js"
+  },
+  "author": "Isaac S.",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "firebase": "^7.8.0"
+  }
+}
