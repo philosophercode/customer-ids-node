@@ -19,9 +19,11 @@ const db = firebase.firestore();
 const customersRef = db.collection("customers");
 
 const express = require('express');
+var cors = require('cors');
 const app = express();
 const port = process.env.PORT || 3000;
 
+app.use(cors())
 
 // app.get('/', (req, res) => res.send('Hello World!'));
 app.get('/', (req, res) => {
