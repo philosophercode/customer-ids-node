@@ -48,6 +48,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/getCustomer', (req, res) => {
+    let data = [];
     let customerRef = customersRef.doc(req.query.id);
     let getCustomer = customerRef.get()
         .then(doc => {
