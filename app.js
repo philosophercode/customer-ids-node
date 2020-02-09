@@ -55,7 +55,14 @@ app.get('/getCustomer', (req, res) => {
                 console.log('No such document!');
             } else {
                 console.log('Document data:', doc.data());
-                res.json(doc.data());
+                const customerData = doc.data();
+                const customerID = doc.id;
+
+                const customer = customerData;
+                customer.id = customerID
+                data.push(customer);
+
+                res.json(data);
             }
         })
         .catch(err => {
