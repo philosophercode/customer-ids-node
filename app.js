@@ -2,7 +2,13 @@ const firebase = require("firebase/app");
 require("firebase/firestore");
 
 const firebaseConfig = {
-    projectId: "customer-id-backend"
+    apiKey: "AIzaSyDh3F0PLVz_9p9d-5gtp9AFPjyQZ72ut2w",
+    authDomain: "customer-id-backend.firebaseapp.com",
+    databaseURL: "https://customer-id-backend.firebaseio.com",
+    projectId: "customer-id-backend",
+    storageBucket: "customer-id-backend.appspot.com",
+    messagingSenderId: "1001460127331",
+    appId: "1:1001460127331:web:4892687b11c5dd23cc8a56"
 };
 
 // Initialize Firebase
