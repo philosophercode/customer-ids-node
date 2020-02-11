@@ -25,7 +25,7 @@ app.use(cors())
 
 app.get('/', (req, res) => {
     // console.log('firebase.config', firebaseConfig)
-    customersRef.get()
+    customersRef.orderBy('name').get()
         .then(snapshot => {
             const data = [];
             snapshot.forEach(doc => {
