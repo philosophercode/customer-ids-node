@@ -2,14 +2,14 @@ const firebase = require("firebase/app");
 require("firebase/firestore");
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDh3F0PLVz_9p9d-5gtp9AFPjyQZ72ut2w",
-    authDomain: "customer-id-backend.firebaseapp.com",
-    databaseURL: "https://customer-id-backend.firebaseio.com",
-    projectId: "customer-id-backend",
-    storageBucket: "customer-id-backend.appspot.com",
-    messagingSenderId: "1001460127331",
-    appId: "1:1001460127331:web:4892687b11c5dd23cc8a56"
-};
+    apiKey: "AIzaSyCnIDEBalqE4FgxhFce76gEhX7mVmPFk8Q",
+    authDomain: "customer-ids-903d9.firebaseapp.com",
+    databaseURL: "https://customer-ids-903d9.firebaseio.com",
+    projectId: "customer-ids-903d9",
+    storageBucket: "customer-ids-903d9.appspot.com",
+    messagingSenderId: "457099130728",
+    appId: "1:457099130728:web:8eec5fb3c39f33936708dd"
+  };
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
