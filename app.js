@@ -1,16 +1,14 @@
-// Firebase App (the core Firebase SDK) is always required and
-// must be listed before other Firebase SDKs
-var firebase = require("firebase/app");
+const firebase = require("firebase/app");
 require("firebase/firestore");
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDh3F0PLVz_9p9d-5gtp9AFPjyQZ72ut2w",
-    authDomain: "customer-id-backend.firebaseapp.com",
-    databaseURL: "https://customer-id-backend.firebaseio.com",
+    // apiKey: "AIzaSyDh3F0PLVz_9p9d-5gtp9AFPjyQZ72ut2w",
+    // authDomain: "customer-id-backend.firebaseapp.com",
+    // databaseURL: "https://customer-id-backend.firebaseio.com",
     projectId: "customer-id-backend",
-    storageBucket: "customer-id-backend.appspot.com",
-    messagingSenderId: "1001460127331",
-    appId: "1:1001460127331:web:4892687b11c5dd23cc8a56"
+    // storageBucket: "customer-id-backend.appspot.com",
+    // messagingSenderId: "1001460127331",
+    // appId: "1:1001460127331:web:4892687b11c5dd23cc8a56"
 };
 
 // Initialize Firebase
@@ -19,42 +17,41 @@ const db = firebase.firestore();
 const customersRef = db.collection("customers");
 
 const express = require('express');
-var cors = require('cors');
+const cors = require('cors');
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 
 app.use(cors())
 
-// app.get('/', (req, res) => res.send('Hello World!'));
 app.get('/', (req, res) => {
-    let data = [];
-    const allCustomers = customersRef.get()
+    console.log('firebase.config', firebaseConfig)
+    customersRef.get()
         .then(snapshot => {
+            const data = [];
             snapshot.forEach(doc => {
-                const customerData = doc.data();
-                const customerID = doc.id;
-
-                const customer = customerData;
-                customer.id = customerID
+                const customer = doc.data();
+                customer.id = doc.id;
+                delete customer.role
+                delete customer.age
                 data.push(customer);
-
-                console.log(doc.id, '=>', doc.data());
             });
-            res.json(data);
+            return data.length === 0 ? res.status(404) : res.json(data);
         })
         .catch(err => {
-            console.log('Error getting documents', err);
+            // Error fetching documents
+            return res.status(404).json(err);
         });
 });
 
 app.get('/getCustomer', (req, res) => {
-    let data = [];
     let customerRef = customersRef.doc(req.query.id);
-    let getCustomer = customerRef.get()
+    customerRef.get()
         .then(doc => {
             if (!doc.exists) {
                 console.log('No such document!');
+                return res.status(404);
             } else {
+                let data = [];
                 console.log('Document data:', doc.data());
                 const customerData = doc.data();
                 const customerID = doc.id;
@@ -63,7 +60,7 @@ app.get('/getCustomer', (req, res) => {
                 customer.id = customerID
                 data.push(customer);
 
-                res.json(data);
+                return res.json(data);
             }
         })
         .catch(err => {
@@ -71,4 +68,4 @@ app.get('/getCustomer', (req, res) => {
         });
 });
 
-app.listen(port, () => console.log(`~~Listening on port ${port}~~`))
+app.listen(port, () => console.log(`~~Listening on port ${port}~~`));
