@@ -24,7 +24,7 @@ const port = process.env.PORT || 8080;
 app.use(cors())
 
 app.get('/', (req, res) => {
-    console.log('firebase.config', firebaseConfig)
+    // console.log('firebase.config', firebaseConfig)
     customersRef.get()
         .then(snapshot => {
             const data = [];
@@ -33,6 +33,7 @@ app.get('/', (req, res) => {
                 customer.id = doc.id;
                 delete customer.role
                 delete customer.age
+                console.log('customer', customer)
                 data.push(customer);
             });
             return data.length === 0 ? res.status(404) : res.json(data);
@@ -54,6 +55,7 @@ app.get('/getCustomer', (req, res) => {
                 console.log('Document data:', doc.data());
                 const customer = doc.data();
                 customer.id = doc.id;
+                console.log('customer', customer)
                 return res.json(customer);
             }
         })
